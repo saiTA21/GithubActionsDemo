@@ -1,5 +1,4 @@
-#create a workflow file sai_actions.yaml in the .github/workflows directory of your repository with the following content:
-name: Run Consumer.py
+name: Run Consumer.py on Main Branch
 
 on:
   push:
@@ -7,20 +6,12 @@ on:
       - main
 
 jobs:
-  build:
+  run-consumer:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x
-
-    - name: Install dependencies
-      run: pip install -r requirements.txt
-
-    - name: Run Consumer.py
-      run: python Consumer.py
+      - name: Run Consumer.py
+        run: python Consumer.py
