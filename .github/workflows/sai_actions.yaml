@@ -1,22 +1,26 @@
-name: Python Script Workflow
+#create a workflow file sai_actions.yaml in the .github/workflows directory of your repository with the following content:
+name: Run Consumer.py
 
 on:
   push:
     branches:
-      - main  # Adjust branch name if necessary
+      - main
 
 jobs:
-  run_python_script:
-    runs-on: ubuntu-latest  # You can choose a different operating system if needed
+  build:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'  # Specify the Python version you want to use
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
 
-      - name: Run Python Script
-        run: python Consumer.py  # Replace 'your_script.py' with the name of your Python script
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run Consumer.py
+      run: python Consumer.py
